@@ -23,7 +23,15 @@ function YourTokens() {
         <>
             <Box>
                 <Flex justifyContent='space-between' mx={2}>
-                    <Text bold my={2} fontSize={4}>Your Tokens</Text>
+                    <Text bold my={2} fontSize={4}
+                    style={{
+                      backgroundImage : 'linear-gradient(216.56deg,#4B50E6 35.32%,#E250E5 94.32%)',
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip : 'text',
+                      color : 'transparent',
+                    }}
+                    > <span>Your Tokens</span>
+                    </Text>
 
                     <Link href='/similarNft' passHref>
                         <Button  width={80} variation="secondary" size='large'>Mint</Button>

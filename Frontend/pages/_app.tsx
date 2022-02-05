@@ -70,6 +70,21 @@ function NextWeb3App({ Component, pageProps }: AppProps) {
                   },
                 },
 
+              },
+              subtle: {
+                primary: {
+                  backgroundColor:
+                    "transparent",
+                    borderRadius: '500px',
+                    boxShadow : '0 0 0 0 white',
+                    border : "0px",
+                  "&:hover": {
+                    backgroundColor:
+                      "transparent",
+                      boxShadow : "0 0 0 0 white",
+                  },
+                },
+
               }
             }
           },

@@ -6,15 +6,14 @@ import useENSName from "../hooks/useENSName";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 import { formatEtherscanLink, shortenHex } from "../util";
 import { Button, Text } from "pcln-design-system"
-
 type AccountProps = {
   triedToEagerConnect: boolean;
 };
 
+
 const Account = ({ triedToEagerConnect }: AccountProps) => {
   const { active, error, activate, chainId, account, setError } =
     useWeb3React();
-
   const {
     isMetaMaskInstalled,
     isWeb3Available,
@@ -67,6 +66,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
         ) : (
           <Button onClick={startOnboarding}>Install Metamask</Button>
         )}
+
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-import Account from "../components/Account";
+// import Account from "../components/Account";
+import Account from "./SequenceAccount";
 import useEagerConnect from "../hooks/useEagerConnect";
 import { Banner, Flex, Heading, Button, Image } from "pcln-design-system";
 import styled from "styled-components";
@@ -24,6 +25,7 @@ function NavBar() {
           alignItems="center"
           justifyContent="space-between"
           mx={2}
+          px={2}
           style={{
             borderBottom: "1px solid rgba(235, 235, 235, 0.2)",
           }}
@@ -85,7 +87,7 @@ function NavBar() {
               >
                 Telegram
               </Button>
-            <Account triedToEagerConnect={triedToEagerConnect} />
+              <Account triedToEagerConnect={triedToEagerConnect} />
           </Flex>
         </Flex>
       </header>
