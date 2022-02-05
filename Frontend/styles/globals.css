@@ -1,0 +1,28 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+* {
+  box-sizing: border-box;
+}
+
+/*
+216.56deg,#E250E5 5.32%,#4B50E6 94.32% */
+:root{
+  background-color: #14141f;
+  --text-primary : #f0efff;
+  --text-secondary : rgb(81, 66, 252);
+  color: var(--text-primary)
+}
+
+a{
+  color: var(--text-primary);
+  text-decoration: none;
+}
