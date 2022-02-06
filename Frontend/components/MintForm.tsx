@@ -7,8 +7,9 @@ import {
   Flex,
   Text,
 } from "pcln-design-system";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useWeb3React } from "@web3-react/core";
+import AccountContext from "../context/AccountContext"
 
 function MintForm({ handlePreview, handleReview, submitMint }) {
   const { library, active, account } = useWeb3React();
@@ -17,9 +18,9 @@ function MintForm({ handlePreview, handleReview, submitMint }) {
   const [nftDesc, setNftDesc] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
-
+  const {walletAddress} = useContext(AccountContext);
   const mintNftHandler = () => {
-    if (tokenUrl && nftName && nftDesc && account) {
+    if (tokenUrl && nftName && nftDesc && walletAddress) {
       setStatusMessage("Minting in process...");
       setIsProcessing(true);
       fetch("/api/mintNft", {
@@ -97,7 +98,7 @@ function MintForm({ handlePreview, handleReview, submitMint }) {
           </Button>
         </Box>
         <Box>
-          <Button m={2} variation="secondary" onClick={mintNftHandler}>
+          <Button m={2}  onClick={mintNftHandler}>
             Confirm to mint
           </Button>
         </Box>

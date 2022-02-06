@@ -11,7 +11,7 @@ function MarketListings(props) {
   if (!data?.nfts) return <div>Loading market listings...</div>;
 
   return (
-    <Box mb={4} p={2}>
+    <Box mb={4} p={2} id="market_place">
       <Text bold m={2} fontSize={4}>
         <span
         style={{
@@ -24,7 +24,7 @@ function MarketListings(props) {
       </Text>
       <Flex wrap>
         {data.nfts.map((nft, index) => (
-          <Box key={index} width={[1, null, 1/2, null, 1/3]} my={3}>
+          <Box key={index} width={[1, 1 / 2, null, 1 / 3, 1 / 4]} my={3}>
             <ListingCard {...nft}></ListingCard>
           </Box>
         ))}

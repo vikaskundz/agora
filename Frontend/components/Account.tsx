@@ -5,7 +5,8 @@ import { injected } from "../connectors";
 import useENSName from "../hooks/useENSName";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
 import { formatEtherscanLink, shortenHex } from "../util";
-import { Button, Text } from "pcln-design-system"
+import { Button, Text } from "pcln-design-system";
+
 type AccountProps = {
   triedToEagerConnect: boolean;
 };

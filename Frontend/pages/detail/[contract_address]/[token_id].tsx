@@ -11,10 +11,10 @@ function Detail(props) {
     const { data, error } = useSwr(`/api/${contract_address}/${token_id}/nftDetail`, fetcher)
 
     if (error) return <div>Failed to load users</div>
-    if (!data?.nft) return <div>Loading market listings...</div>
+    if (!data?.nft_data) return <div>Loading market listings...</div>
     return (
         <Box p={2}>
-            <DetailCard {...data?.nft}></DetailCard>
+            <DetailCard {...data.nft_data}></DetailCard>
         </Box>
     );
 }

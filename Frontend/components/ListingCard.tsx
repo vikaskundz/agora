@@ -12,13 +12,23 @@ import Link from "next/link";
 
 const StyledImage = styled(BackgroundImage)`
   background-size: contain;
-  background-color: black;
+  background-color: #0d1e31;
   border-radius: 10px;
 `;
 
 const StyledAnchor = styled.a`
   text-decoration: none;
   color: inherit;
+`;
+
+
+
+const StyledCard = styled(Card)`
+// box-shadow : 0 0 8px 0 rgb(255 255 255 / 20%), 0 8px 4px -2px rgb(255 255 255 / 12%), 0 8px 4px -1px rgb(255 255 255 / 16%);
+  &:hover {
+    transform: translateY(-10px);
+    transition: all 0.4s ease;
+  }
 `;
 
 function ListingCard({
@@ -33,28 +43,16 @@ function ListingCard({
   const creator = "Satoshi Nakamoto";
   return (
     <Box mx={2} p={1}>
-      <StyledAnchor>
-        <Card
-          style={{
-            background: "#343444",
-            cursor: "pointer",
-            transform: "translateX(-10px)",
-          }}
+      <StyledAnchor href={`/detail/${contract_address}/${token_id}`} passHref>
+        <StyledCard bg='#343444'
           borderWidth={0}
           borderRadius={20}
+          boxShadow={'lg'}
           width="100%"
         >
           <Flex flexDirection="column" alignItems="center" width="100%">
             <Box width={1} p={3}>
-              <StyledImage image={cached_file_url} height="250px">
-                {!cached_file_url && (
-                  <Box ml={2} p={2}>
-                    <Text align="center" color="white" bold>
-                      No image
-                    </Text>
-                  </Box>
-                )}
-              </StyledImage>
+              <StyledImage image={cached_file_url || '/no-image.jpeg'} height="250px" />
             </Box>
             <Flex
               flexDirection="row"
@@ -160,7 +158,7 @@ function ListingCard({
               </Flex>
             </Flex>
           )}
-        </Card>
+        </StyledCard>
       </StyledAnchor>
     </Box>
   );

@@ -1,62 +1,85 @@
 import SequenceService from "../services/sequence.service";
-import { useEffect, useState } from "react";
-import { Button, Text, Flex, Box} from "pcln-design-system";
+import { useEffect, useState, useContext } from "react";
+import { Button, Text, Flex, Box, IconButton } from "pcln-design-system";
 import { formatEtherscanLink, shortenHex } from "../util";
-import useENSName from "../hooks/useENSName";
-
+import AccountContext from "../context/AccountContext";
+import { ExitToApp } from "pcln-icons";
 
 export default function Account() {
-  const [account,setAccount] = useState(null);
-  const [walletAddress,setWalletAddress] = useState('');
-  useEffect(() => {
-    if(account && account.connected)
-      getWalletAddress()
+  const { isConnected, setIsConnected, walletAddress, setWalletAddress, wallet, setWallet } = useContext(AccountContext)
+  //const { account } = useWeb3React();
+  //const ENSName = useENSName(account);
+  const [connectionDetails, setConnectionDetails] = useState(null)
+  useEffect(async () => {
+    // connectWallet()
+    const _session = JSON.parse(localStorage.getItem('@sequence.session'));
 
-  },[account])
+    if(_session){
+      const _walletContext = await SequenceService.getSession();
+      // console.log('_walletContext',_walletContext);
 
-  const ENSName = useENSName(account);
+      setIsConnected(true)
+      setConnectionDetails({connected : true})
+      setWallet(_walletContext)
+      setWalletAddress(_walletContext.accountAddress)
+      // setWalletAddress(_walletContext.getAddress())
 
-  function connectWallet() {
-    SequenceService.connectWallet().then(account => {
-      console.log('account',account )
-      account && account.connected ? setAccount(account) : setAccount(null)
-    })
+    }
+
+
+  }, [])
+
+  async function connectWallet() {
+    const { _wallet, _connectDetails } = await SequenceService.connectWallet(isConnected, setIsConnected, wallet)
+    if (_wallet && _connectDetails?.connected) {
+      // console.log('connectWallet',_wallet);
+
+      const _wAddress = await _wallet.getAddress()
+      setIsConnected(true)
+      setConnectionDetails(_connectDetails)
+      setWallet(_wallet)
+      setWalletAddress(_wAddress)
+    }
+
+    return;
   }
 
-  function disconnectWallet(){
+  function disconnectWallet() {
     SequenceService.disconnectWallet().then(details => {
-      console.log('disconnect',details);
-      account && account.connected ? setAccount(details) : setAccount(null)
+      localStorage.removeItem('@sequence.session');
+      setIsConnected(false)
+      setConnectionDetails({connected : false})
+      setWallet(null)
+      setWalletAddress(null)
+      window.location.href = '/'
     })
-  }
-
-  function getWalletAddress() {
-     SequenceService.getWalletAddress().then(walletAddress => {
-       console.log('walletAddress',walletAddress);
-
-      account && account.connected ? setWalletAddress(walletAddress) : setWalletAddress('')
-     });
   }
 
   return (
     <>
       {
-        account && account.connected ? (
+        isConnected ? (
           <Flex flexDirection="row" alignItems="center" justifyContent="center">
-          <Text mx={2} px={2}>Welcome,</Text> <a
-            {...{
-              href: formatEtherscanLink("Account", [Number(account.chainId), walletAddress]),
-              target: "_blank",
-              rel: "noopener noreferrer",
-            }}
-          >
-            {ENSName || `${shortenHex(walletAddress, 6)}`}
-          </a>
-          <Button onClick={disconnectWallet} variation="subtle">signout</Button>
+            <Text  px={2}>Welcome,</Text> <a
+              {...{
+                href: formatEtherscanLink("Account", [Number(connectionDetails?.chainId), walletAddress]),
+                target: "_blank",
+                rel: "noopener noreferrer",
+              }}
+            >
+              {walletAddress ? `${shortenHex(walletAddress, 6)}` : ''}
+            </a>
+          {/* <Button onClick={disconnectWallet} variation="subtle">signout</Button> */}
+          <IconButton
+            title="Sign out"
+            onClick={disconnectWallet}
+            mr={2}
+            icon={<ExitToApp color="primary" ml={2} size={30} />}
+          />
           </Flex>
         ) : (
           <Button onClick={connectWallet}>
-              Connect With Sequence
+            Connect With Sequence
           </Button>
         )
       }

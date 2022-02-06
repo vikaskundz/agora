@@ -1,18 +1,19 @@
 import { Box, Flex, Text, Button, Heading } from "pcln-design-system"
 import Popover from 'pcln-popover'
-import { useState } from "react"
+import { useContext, useState } from "react"
 import useSwr from 'swr'
 import ListingCard from "./ListingCard"
 import MintForm from "./MintForm"
 import { Modal } from 'pcln-modal'
 import { useWeb3React } from '@web3-react/core'
 import Link from "next/link"
+import AccountContext from "../context/AccountContext"
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 function YourTokens() {
-    const { library, active, account } = useWeb3React();
-    const { data, error } = useSwr(`/api/yourTokens?account=${account}`, fetcher)
+    const { walletAddress } = useContext(AccountContext)
+    const { data, error } = useSwr(walletAddress ? `/api/yourTokens?account=${walletAddress}` : null, fetcher)
 
     const [showForm, setShowForm] = useState(false)
 
@@ -21,7 +22,7 @@ function YourTokens() {
 
     return (
         <>
-            <Box>
+            <Box id="mint_nft">
                 <Flex justifyContent='space-between' mx={2}>
                     <Text bold my={2} fontSize={4}
                     style={{
@@ -34,7 +35,7 @@ function YourTokens() {
                     </Text>
 
                     <Link href='/similarNft' passHref>
-                        <Button  width={80} variation="secondary" size='large'>Mint</Button>
+                        <Button  width={80}  size='large'>Mint</Button>
                     </Link>
                 </Flex>
                 <Flex wrap>

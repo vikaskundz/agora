@@ -2,7 +2,7 @@ import { Box } from "pcln-design-system"
 import styled from "styled-components"
 import MarketListings from "./MarketListings"
 import YourTokens from "./YourTokens"
-import Header from "./Header.tsx";
+import HeroBanner from "./HeroBanner";
 
 const StyledAnchor = styled.a`
     text-decoration: none;
@@ -13,10 +13,10 @@ const StyledAnchor = styled.a`
 function Homepage() {
 
     return (
-        <Box mx={3}>
-            <Header></Header>
-            <MarketListings mb={3}></MarketListings>
-            <YourTokens></YourTokens>
+        <Box>
+            <HeroBanner />
+            <YourTokens />
+            <MarketListings />
         </Box>
     )
 }
