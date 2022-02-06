@@ -1,6 +1,7 @@
 package com.agora.botapi;
 
 
+import com.agora.botapi.handlers.CounterFeitHandler;
 import com.agora.botapi.handlers.ExploreNFTHandler;
 import com.agora.botapi.handlers.MyProfileNFTHandler;
 import com.agora.botapi.handlers.mint.MintNFTHandler;
@@ -41,6 +42,9 @@ public class AghoraBot extends TelegramLongPollingBot {
     @Autowired
     private MyProfileNFTHandler profileNFTHandler;
 
+    @Autowired
+    private CounterFeitHandler counterFeitHandler;
+
 
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -60,6 +64,11 @@ public class AghoraBot extends TelegramLongPollingBot {
             }
             if (callBackData.contains(MY_PROFILE_OPTION)) {
                 SendMessage message = profileNFTHandler.handle(update);
+                sendMessage(message, update);
+            }
+
+            if (callBackData.contains("counterFeit")) {
+                SendMessage message = counterFeitHandler.handle(update);
                 sendMessage(message, update);
             }
 

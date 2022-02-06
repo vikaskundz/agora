@@ -1,6 +1,8 @@
 package com.agora.botapi;
 
 import com.agora.botapi.data.DataStore;
+import com.agora.botapi.handlers.ExploreNFTHandler;
+import com.agora.botapi.handlers.MyProfileNFTHandler;
 import com.agora.botapi.handlers.mint.MintNFTHandler;
 import com.agora.botapi.utils.KeyBoardUtils;
 import com.agora.botapi.validation.EthereumAddressValidator;
@@ -52,9 +54,9 @@ public class ResponseProcessor {
         message.setText("Main Menu");
 
         List<InlineKeyboardButton> rowInline1 = new ArrayList();
-        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("My Profile", "My_Profile"));
-        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("Explore NFTs", "Explore_NFTs"));
-        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("Mint NFTs", "Mint_NFTs"));
+        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("My Profile", MyProfileNFTHandler.MY_PROFILE_OPTION));
+        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("Explore NFTs", ExploreNFTHandler.EXPLORE_NFTS_OPTION));
+        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("Mint NFTs", MintNFTHandler.MINT_NFTS_OPTION));
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList();
         rowsInline.add(rowInline1);

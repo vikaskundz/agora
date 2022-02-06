@@ -21,7 +21,7 @@ import static com.agora.botapi.data.DataStore.getTokenInfo;
 public class MintNFTHandler {
 
     private static final String MINT_NFTS_FOR_MY_SELF = "Mint_NFTs_For_My_Self";
-    private static final String MINT_NFTS_FOR_MY_OTHERS = "Mint_NFTs_For_Others";
+    private static final String MINT_NFTS_FOR_OTHERS = "Mint_NFTs_For_Others";
     public static final String ENTER_THE_URL_OF_IMAGE = "Enter the URL of image";
     public static final String ENTER_THE_NAME_OF_NFT = "Enter the name of the NFT";
     public static final String ENTER_THE_DESCRIPTION_OF_NFT = "Lets give it a nice description!!... Enter a descriptionfor NFT";
@@ -39,7 +39,7 @@ public class MintNFTHandler {
                 return customMsg(ENTER_THE_NAME_OF_NFT, update);
             }
 
-            if (callBackData.contains(MINT_NFTS_FOR_MY_OTHERS)) {
+            if (callBackData.contains(MINT_NFTS_FOR_OTHERS)) {
                 return customMsg(ENTER_THE_WALLET_ADDR_OF_YOUR_BUDDY, update);
             }
         }
@@ -81,12 +81,12 @@ public class MintNFTHandler {
 
                 DataStore.addToken(walletAddr, tokenInfo);
                 if (StringUtils.isNotBlank(tokenInfo.getBuddyWalletAddress())) {
-                    sendMessage  = customMsg(String.format("Minting the image with  name: %s desc: %s url: %s NOW  for address : %s", tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), tokenInfo.getBuddyWalletAddress()), update);
+                    sendMessage  = customMsg(String.format("Minted the image with  name: %s desc: %s url: %s NOW  for address : %s", tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), tokenInfo.getBuddyWalletAddress()), update);
                     //call REST service from here
                      mintedToken  =  restfulMint(tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), tokenInfo.getBuddyWalletAddress());
                     return sendMessage;
                 } else {
-                    sendMessage  = customMsg(String.format("Minting the image with  name: %s desc: %s url: %s NOW  for address : %s", tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr), update);
+                    sendMessage  = customMsg(String.format("Minted the image with  name: %s desc: %s url: %s NOW  for address : %s", tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr), update);
                     //call REST service from here
                      mintedToken  =restfulMint(tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr);
                     return sendMessage;
@@ -125,7 +125,7 @@ public class MintNFTHandler {
         message.setText("Is this new NFT for you or for your Buddy?");
         List<InlineKeyboardButton> rowInline1 = new ArrayList();
         rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("My Self", MINT_NFTS_FOR_MY_SELF));
-        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("My Buddy", MINT_NFTS_FOR_MY_OTHERS));
+        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("My Buddy", MINT_NFTS_FOR_OTHERS));
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList();
         rowsInline.add(rowInline1);
