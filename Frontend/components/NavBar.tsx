@@ -98,12 +98,12 @@ function NavBar() {
             }
                 Telegram
               </Button>*/}
-            {isConnected ? <IconButton
-
+            {isConnected ?
+              <IconButton
               title="Agora Bot"
               onClick={() => {
                 window.open(
-                  " http://t.me/AgoriNFTBot"
+                  "https://t.me/agora_nft_bot"
                 );
               }}
               mr={2}
