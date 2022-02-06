@@ -1,6 +1,8 @@
 package com.agora.botapi;
 
 
+import com.agora.botapi.handlers.ExploreNFTHandler;
+import com.agora.botapi.handlers.MyProfileNFTHandler;
 import com.agora.botapi.handlers.mint.MintNFTHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +30,12 @@ public class AghoraBot extends TelegramLongPollingBot {
     @Autowired
     private MintNFTHandler mintNFTHandler;
 
+    @Autowired
+    private ExploreNFTHandler exploreNFTHandler;
+
+    @Autowired
+    private MyProfileNFTHandler profileNFTHandler;
+
 
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -36,8 +44,17 @@ public class AghoraBot extends TelegramLongPollingBot {
         } else if (update.hasCallbackQuery()) {
             String callBackData = update.getCallbackQuery().getData();
 
-            if (callBackData.contains("Mint_NFT")) {
+            if (callBackData.contains("Mint_NFTs")) {
                 SendMessage message = mintNFTHandler.handle(update);
+                sendMessage(message, update);
+            }
+
+            if (callBackData.contains("Explore_NFTs")) {
+                SendMessage message = exploreNFTHandler.handle(update);
+                sendMessage(message, update);
+            }
+            if (callBackData.contains("My_Profile")) {
+                SendMessage message = profileNFTHandler.handle(update);
                 sendMessage(message, update);
             }
 

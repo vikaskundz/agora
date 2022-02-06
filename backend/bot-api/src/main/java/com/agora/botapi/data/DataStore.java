@@ -1,6 +1,12 @@
 package com.agora.botapi.data;
 
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.glassfish.jersey.internal.guava.Lists;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DataStore {
@@ -38,5 +44,27 @@ public class DataStore {
     public static void addToken(String walletAddr, TokenInfo tokenInfo) {
         mintProcessData.put(walletAddr, tokenInfo);
     }
+
+    private static final Map<String, List<TokenInfo>> mintedTokens = new HashMap<>();//chatId,TokenInfoList
+
+    public static void saveMintedTokenInfo(String chatId, TokenInfo tokenInfo) {
+        if(CollectionUtils.isNotEmpty(mintedTokens.get(chatId)) ){
+            mintedTokens.get(chatId).add(tokenInfo);
+        }
+        else{
+            List<TokenInfo> list = new ArrayList<>();
+            list.add(tokenInfo);
+            mintedTokens.put(chatId, list);
+        }
+    }
+
+
+    public static List<TokenInfo> retrieveMintedTokenInfo(String chatId) {
+        if(CollectionUtils.isNotEmpty(mintedTokens.get(chatId)) ){
+           return mintedTokens.get(chatId);
+        }
+        return null;
+    }
+
 
 }
