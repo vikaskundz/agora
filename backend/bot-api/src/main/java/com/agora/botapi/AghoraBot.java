@@ -55,6 +55,11 @@ public class AghoraBot extends TelegramLongPollingBot {
 
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
+            if (update.getMessage().getReplyToMessage() != null
+                    && CounterfeitDetectNFTHandler.ENTER_THE_URL_OF_IMAGE_TO_CHECK_FOR_COUNTERFEIT.equals(update.getMessage().getReplyToMessage().getText())) {
+                List<SendPhoto> photos = counterfeitDetectNFTHandler.handlePhotos(update);
+                sendMessage(photos, update);
+            }
             SendMessage message = responseProcessor.process(update);
             sendMessage(message, update);
         } else if (update.hasCallbackQuery()) {
@@ -70,7 +75,7 @@ public class AghoraBot extends TelegramLongPollingBot {
             }
 
             if (callBackData.contains("DETAILS_NFT")) {
-                List<SendPhoto> photos  = detailsNFTHandler.handle(update);
+                List<SendPhoto> photos = detailsNFTHandler.handle(update);
                 sendMessage(photos, update);
             }
 
@@ -79,9 +84,9 @@ public class AghoraBot extends TelegramLongPollingBot {
                 sendMessage(photos, update);
             }
 
-            if (callBackData.contains("Detect_Counter_NFTs")) {
-                List<SendPhoto> photos = counterfeitDetectNFTHandler.handle(update);
-                sendMessage(photos, update);
+            if (callBackData.contains(CounterfeitDetectNFTHandler.DETECT_COUNTER_NFTS_OPTION)) {
+                SendMessage message = counterfeitDetectNFTHandler.handleMessage(update);
+                sendMessage(message, update);
             }
 
         }

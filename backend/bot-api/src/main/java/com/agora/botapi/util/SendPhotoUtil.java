@@ -16,7 +16,8 @@ public class SendPhotoUtil {
         List<SendPhoto> sendMessages = new ArrayList<>();
         for (int i = 0; i < cachedUrlList.size(); i++) {
             SendPhoto message = new SendPhoto();
-            message.setChatId(update.getCallbackQuery().getMessage().getChatId().toString());
+            String chatId = update.getCallbackQuery() != null ? update.getCallbackQuery().getMessage().getChat().getId().toString() : update.getMessage().getChat().getId().toString();
+            message.setChatId(chatId);
             if (cachedUrlList.get(i) == null) {
                 continue;
             }
@@ -38,7 +39,7 @@ public class SendPhotoUtil {
                 markupInline.setKeyboard(rowsInline);
                 message.setReplyMarkup(markupInline);
             } else {
-                message.setCaption("<b><i>Similarity %: </i></b>" +(similarity.get(i))*100);
+                message.setCaption("<b><i>Similarity %: </i></b>" +(similarity.get(i)));
                 message.setParseMode("HTML");
             }
 

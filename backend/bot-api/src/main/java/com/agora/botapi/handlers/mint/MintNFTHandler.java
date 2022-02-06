@@ -31,7 +31,8 @@ public class MintNFTHandler {
     public static final String MINT_NFTS_OPTION = "Mint_NFTs";
     public static final String ENTER_THE_WALLET_ADDR_OF_YOUR_BUDDY = "Enter the wallet address of your buddy";
 
-    public SendMessage handle(Update update) {
+    public SendMessage
+    handle(Update update) {
         if (update.getCallbackQuery() != null) {
             String callBackData = update.getCallbackQuery().getData();
             if (callBackData.contains(MINT_NFTS_FOR_MY_SELF)) {
@@ -88,6 +89,7 @@ public class MintNFTHandler {
                     sendMessage  = customMsg(String.format("Minted the image with  name: %s desc: %s url: %s NOW  for address : %s", tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr), update);
                     //call REST service from here
                     mintedToken = restfulMint(tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr);
+                    return sendMessage;
                 }
 
             }
