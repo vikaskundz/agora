@@ -126,8 +126,8 @@ public class MyAmazingBot extends TelegramLongPollingBot {
                     SendPhoto message = null;
                     message = new SendPhoto();
                     message.setChatId(update.getCallbackQuery().getMessage().getChatId().toString());
-                    message.setPhoto(new InputFile().setMedia(data[i%10]));
-                    message.setCaption(data[i%10]);
+                    message.setPhoto(new InputFile().setMedia(data[i % 10]));
+                    message.setCaption(data[i % 10]);
                     InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
                     List<InlineKeyboardButton> rowInline1 = new ArrayList();
                     List<List<InlineKeyboardButton>> rowsInline = new ArrayList();
@@ -147,7 +147,7 @@ public class MyAmazingBot extends TelegramLongPollingBot {
                         e.printStackTrace();
                     }
                 }
-            }else if (call_data.equals("imageSelect")) {
+            } else if (call_data.equals("imageSelect")) {
                 SendMessage sendMessage = new SendMessage();
                 message_id = update.getCallbackQuery().getMessage().getMessageId();
                 String chatId = update.getCallbackQuery().getMessage().getChatId().toString();

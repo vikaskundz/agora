@@ -42,7 +42,7 @@ public class MintNFTHandler {
             }
         }
 
-        String chatId = Optional.ofNullable(update.getMessage()).map(m ->m.getChat().getId().toString()).orElse(null);
+        String chatId = Optional.ofNullable(update.getMessage()).map(m -> m.getChat().getId().toString()).orElse(null);
         if (StringUtils.isNotBlank(chatId)) {
             String prevMsg = update.getMessage().getReplyToMessage().getText();
 
@@ -50,7 +50,7 @@ public class MintNFTHandler {
                 String walletAddr = DataStore.getWalletAddrOfUser(chatId);
                 TokenInfo tokenInfo = getTokenInfo(walletAddr);
                 tokenInfo.setName(update.getMessage().getText());
-                DataStore.addToken(walletAddr,tokenInfo);
+                DataStore.addToken(walletAddr, tokenInfo);
                 return customMsg(ENTER_THE_DESCRIPTION_OF_NFT, update);
             }
 
@@ -58,7 +58,7 @@ public class MintNFTHandler {
                 String walletAddr = DataStore.getWalletAddrOfUser(chatId);
                 TokenInfo tokenInfo = getTokenInfo(walletAddr);
                 tokenInfo.setDescription(update.getMessage().getText());
-                DataStore.addToken(walletAddr,tokenInfo);
+                DataStore.addToken(walletAddr, tokenInfo);
                 return customMsg(ENTER_THE_URL_OF_IMAGE, update);
             }
 
@@ -67,7 +67,7 @@ public class MintNFTHandler {
                 TokenInfo tokenInfo = getTokenInfo(walletAddr);
                 tokenInfo.setTokenUrl(update.getMessage().getText());
                 //call REST service from here
-                DataStore.addToken(walletAddr,tokenInfo);
+                DataStore.addToken(walletAddr, tokenInfo);
                 return customMsg(String.format("Minting the image with  name: %s desc: %s url: %s NOW  for address : %s", tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr), update);
             }
 
