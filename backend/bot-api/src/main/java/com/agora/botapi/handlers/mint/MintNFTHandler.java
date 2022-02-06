@@ -25,9 +25,9 @@ public class MintNFTHandler {
 
     private static final String MINT_NFTS_FOR_MY_SELF = "Mint_NFTs_For_My_Self";
     private static final String MINT_NFTS_FOR_OTHERS = "Mint_NFTs_For_Others";
-    public static final String ENTER_THE_URL_OF_IMAGE = "Enter the URL of image";
+    public static final String ENTER_THE_URL_OF_IMAGE = "Enter the URL of image you want to mint";
     public static final String ENTER_THE_NAME_OF_NFT = "Enter the name of the NFT";
-    public static final String ENTER_THE_DESCRIPTION_OF_NFT = "Lets give it a nice description!!... Enter a descriptionfor NFT";
+    public static final String ENTER_THE_DESCRIPTION_OF_NFT = "Enter a description for NFT to be minted";
     public static final String MINT_NFTS_OPTION = "Mint_NFTs";
     public static final String ENTER_THE_WALLET_ADDR_OF_YOUR_BUDDY = "Enter the wallet address of your buddy";
 
