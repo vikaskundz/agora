@@ -13,14 +13,15 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class AghoraBot extends TelegramLongPollingBot {
 
     public String getBotUsername() {
-        return null;
+        return "koli_manja_bot";
+        //  return "agora_nft_bot";
     }
 
 
     public String getBotToken() {
-        return null;
+        return "5256836230:AAHzXEltvka2f5xGQiO44JjYmF3Lt0AqvbQ";
+        //return "5173952753:AAFhjz_hKjuVgcjuj8X8VhFQ7qCHLIhQQ0Y";
     }
-
     @Autowired
     private ResponseProcessor responseProcessor;
 
@@ -36,8 +37,8 @@ public class AghoraBot extends TelegramLongPollingBot {
         } else if (update.hasCallbackQuery()) {
             String callBackData = update.getCallbackQuery().getData();
 
-            if (callBackData.contains("Mint_NFT")) {
-                SendMessage message = mintNFTHandler.handle(update, null);
+            if (callBackData.contains("Mint_NFTs")) {
+                SendMessage message = mintNFTHandler.handle(update);
                 sendMessage(message, update);
             }
 
