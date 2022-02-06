@@ -38,7 +38,7 @@ public class AghoraBot extends TelegramLongPollingBot {
         } else if (update.hasCallbackQuery()) {
             String callBackData = update.getCallbackQuery().getData();
 
-            if (callBackData.contains("Mint_NFTsw")) {
+            if (callBackData.contains("Mint_NFT")) {
                 SendMessage message = mintNFTHandler.handle(update, null);
                 sendMessage(message, update);
             }
