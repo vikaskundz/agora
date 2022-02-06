@@ -1,6 +1,8 @@
 package com.agora.botapi;
 
 
+import com.agora.botapi.handlers.CounterfeitDetectNFTHandler;
+import com.agora.botapi.handlers.DetailsNFTHandler;
 import com.agora.botapi.handlers.ExploreNFTHandler;
 import com.agora.botapi.handlers.MyProfileNFTHandler;
 import com.agora.botapi.handlers.mint.MintNFTHandler;
@@ -8,14 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.util.List;
 
 @Component
 public class AghoraBot extends TelegramLongPollingBot {
 
     public String getBotUsername() {
-        return "agora_nft_bot";
+        return "juice_test_bot";
     }
 
 
@@ -36,6 +41,12 @@ public class AghoraBot extends TelegramLongPollingBot {
     @Autowired
     private MyProfileNFTHandler profileNFTHandler;
 
+    @Autowired
+    private DetailsNFTHandler detailsNFTHandler;
+
+    @Autowired
+    private CounterfeitDetectNFTHandler counterfeitDetectNFTHandler;
+
 
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -50,24 +61,56 @@ public class AghoraBot extends TelegramLongPollingBot {
             }
 
             if (callBackData.contains("Explore_NFTs")) {
-                SendMessage message = exploreNFTHandler.handle(update);
-                sendMessage(message, update);
+                List<SendPhoto> photos = exploreNFTHandler.handle(update);
+                sendMessage(photos, update);
             }
+
+            if (callBackData.contains("DETAILS_NFT")) {
+                List<SendPhoto> photos  = detailsNFTHandler.handle(update);
+                sendMessage(photos, update);
+            }
+
             if (callBackData.contains("My_Profile")) {
-                SendMessage message = profileNFTHandler.handle(update);
-                sendMessage(message, update);
+                List<SendPhoto> photos = profileNFTHandler.handle(update);
+                sendMessage(photos, update);
+            }
+
+            if (callBackData.contains("Detect_Counter_NFTs")) {
+                List<SendPhoto> photos = counterfeitDetectNFTHandler.handle(update);
+                sendMessage(photos, update);
             }
 
         }
     }
 
-    private void sendMessage(SendMessage message,  Update update) {
+    private void sendMessage(SendMessage message, Update update) {
         try {
             String chatId = update.getCallbackQuery() != null ? update.getCallbackQuery().getMessage().getChat().getId().toString() : update.getMessage().getChat().getId().toString();
             message.setChatId(chatId);
             execute(message); // Sending our message object to user
         } catch (TelegramApiException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void sendMessage(List<SendPhoto> photos, Update update) {
+        try {
+            String chatId = update.getCallbackQuery() != null ? update.getCallbackQuery().getMessage().getChat().getId().toString() : update.getMessage().getChat().getId().toString();
+            for (SendPhoto sendPhoto : photos) {
+                sendPhoto.setChatId(chatId);
+                execute(sendPhoto); // Sending our message object to user
+            }
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+            SendMessage message = new SendMessage();
+            String chatId = update.getCallbackQuery() != null ? update.getCallbackQuery().getMessage().getChat().getId().toString() : update.getMessage().getChat().getId().toString();
+            message.setChatId(chatId);
+            message.setText("Failed to perform the action!");
+            try {
+                execute(message);
+            } catch (TelegramApiException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

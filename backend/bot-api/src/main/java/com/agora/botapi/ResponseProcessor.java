@@ -2,6 +2,7 @@ package com.agora.botapi;
 
 import com.agora.botapi.data.DataStore;
 import com.agora.botapi.handlers.mint.MintNFTHandler;
+import com.agora.botapi.util.KeyBoardUtils;
 import com.agora.botapi.validation.EthereumAddressValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.agora.botapi.util.KeyBoardUtils.inlineKeyBoardButton;
 
 @Component
 public class ResponseProcessor {
@@ -28,9 +28,10 @@ public class ResponseProcessor {
         String msg = update.getMessage().getText();
         if (DataStore.hasWalletRegistered(chatId)) {
 
-            if (MintNFTHandler.ENTER_THE_URL_OF_IMAGE.equals(update.getMessage().getReplyToMessage()) ||
-                    MintNFTHandler.ENTER_THE_NAME_OF_NFT.equals(update.getMessage().getReplyToMessage()) ||
-                    MintNFTHandler.ENTER_THE_DESCRIPTION_OF_NFT.equals(update.getMessage().getReplyToMessage())) {
+            if (update.getMessage().getReplyToMessage() != null && (MintNFTHandler.ENTER_THE_URL_OF_IMAGE.equals(update.getMessage().getReplyToMessage().getText()) ||
+                    MintNFTHandler.ENTER_THE_WALLET_ADDR_OF_YOUR_BUDDY.equals(update.getMessage().getReplyToMessage().getText()) ||
+                    MintNFTHandler.ENTER_THE_NAME_OF_NFT.equals(update.getMessage().getReplyToMessage().getText()) ||
+                    MintNFTHandler.ENTER_THE_DESCRIPTION_OF_NFT.equals(update.getMessage().getReplyToMessage().getText()))) {
                 return mintNFTHandler.handle(update);
             }
 
@@ -49,17 +50,18 @@ public class ResponseProcessor {
     private SendMessage mainMenuMsg(Update update) {
         SendMessage message = new SendMessage();
         message.setText("Main Menu");
-
-        List<InlineKeyboardButton> rowInline1 = new ArrayList();
-        rowInline1.add(inlineKeyBoardButton("My Profile", "My_Profile"));
-        rowInline1.add(inlineKeyBoardButton("Explore NFTs", "Explore_NFTs"));
-        rowInline1.add(inlineKeyBoardButton("Mint NFTs", "Mint_NFTs"));
-        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList();
+        List<InlineKeyboardButton> rowInline1 = new ArrayList();
+        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("My NFTs", "My_Profile"));
+        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("Explore NFTs", "Explore_NFTs"));
         rowsInline.add(rowInline1);
+        List<InlineKeyboardButton> rowInline2 = new ArrayList();
+        rowInline2.add(KeyBoardUtils.inlineKeyBoardButton("Mint NFTs", "Mint_NFTs"));
+        rowInline2.add(KeyBoardUtils.inlineKeyBoardButton("Detect Counterfeit NFTs", "Detect_Counter_NFTs"));
+        InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
+        rowsInline.add(rowInline2);
         markupInline.setKeyboard(rowsInline);
         message.setReplyMarkup(markupInline);
-
         return message;
     }
 
