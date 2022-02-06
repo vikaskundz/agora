@@ -2,6 +2,7 @@ package com.agora.botapi.handlers.mint;
 
 import com.agora.botapi.data.DataStore;
 import com.agora.botapi.data.TokenInfo;
+import com.agora.botapi.utils.KeyBoardUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -15,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.agora.botapi.data.DataStore.getTokenInfo;
-import static com.agora.botapi.util.KeyBoardUtils.inlineKeyBoardButton;
 
 @Component
 public class MintNFTHandler {
@@ -124,8 +124,8 @@ public class MintNFTHandler {
         SendMessage message = new SendMessage();
         message.setText("Is this new NFT for you or for your Buddy?");
         List<InlineKeyboardButton> rowInline1 = new ArrayList();
-        rowInline1.add(inlineKeyBoardButton("My Self", MINT_NFTS_FOR_MY_SELF));
-        rowInline1.add(inlineKeyBoardButton("My Buddy", MINT_NFTS_FOR_MY_OTHERS));
+        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("My Self", MINT_NFTS_FOR_MY_SELF));
+        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("My Buddy", MINT_NFTS_FOR_MY_OTHERS));
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList();
         rowsInline.add(rowInline1);

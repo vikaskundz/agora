@@ -2,6 +2,7 @@ package com.agora.botapi;
 
 import com.agora.botapi.data.DataStore;
 import com.agora.botapi.handlers.mint.MintNFTHandler;
+import com.agora.botapi.utils.KeyBoardUtils;
 import com.agora.botapi.validation.EthereumAddressValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.agora.botapi.util.KeyBoardUtils.inlineKeyBoardButton;
 
 @Component
 public class ResponseProcessor {
@@ -52,9 +52,9 @@ public class ResponseProcessor {
         message.setText("Main Menu");
 
         List<InlineKeyboardButton> rowInline1 = new ArrayList();
-        rowInline1.add(inlineKeyBoardButton("My Profile", "My_Profile"));
-        rowInline1.add(inlineKeyBoardButton("Explore NFTs", "Explore_NFTs"));
-        rowInline1.add(inlineKeyBoardButton("Mint NFTs", "Mint_NFTs"));
+        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("My Profile", "My_Profile"));
+        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("Explore NFTs", "Explore_NFTs"));
+        rowInline1.add(KeyBoardUtils.inlineKeyBoardButton("Mint NFTs", "Mint_NFTs"));
         InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowsInline = new ArrayList();
         rowsInline.add(rowInline1);
