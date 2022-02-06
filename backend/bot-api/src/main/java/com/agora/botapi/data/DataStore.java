@@ -30,10 +30,11 @@ public class DataStore {
     }
 
 
-    private static final Map<String, TokenInfo> mintProcessData = new HashMap<>();//chatId,TokenInfo
+    private static final Map<String, TokenInfo> selfMintProcessData = new HashMap<>();//chatId,TokenInfo
+
 
     public static TokenInfo getTokenInfo(String walletAddr) {
-        TokenInfo token = mintProcessData.get(walletAddr);
+        TokenInfo token = selfMintProcessData.get(walletAddr);
         if (token == null) {
             token = new TokenInfo();
         }
@@ -41,7 +42,7 @@ public class DataStore {
     }
 
     public static void addToken(String walletAddr, TokenInfo tokenInfo) {
-        mintProcessData.put(walletAddr, tokenInfo);
+        selfMintProcessData.put(walletAddr, tokenInfo);
     }
 
     private static final Map<String, List<TokenInfo>> mintedTokens = new HashMap<>();//chatId,TokenInfoList

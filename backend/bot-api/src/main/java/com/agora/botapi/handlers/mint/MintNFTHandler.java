@@ -21,13 +21,13 @@ import static com.agora.botapi.util.KeyBoardUtils.inlineKeyBoardButton;
 public class MintNFTHandler {
 
     private static final String MINT_NFTS_FOR_MY_SELF = "Mint_NFTs_For_My_Self";
-    private static final String MINT_NFTS_FOR_MY_SELF_WITH_IMAGE_URL = "Mint_NFTs_For_My_Self_With_Image_Url";
     private static final String MINT_NFTS_FOR_MY_OTHERS = "Mint_NFTs_For_Others";
     public static final String ENTER_THE_URL_OF_IMAGE = "Enter the URL of image";
     public static final String ENTER_THE_NAME_OF_NFT = "Enter the name of the NFT";
     public static final String ENTER_THE_DESCRIPTION_OF_NFT = "Lets give it a nice description!!... Enter a descriptionfor NFT";
 
     public static final String MINT_NFTS_OPTION = "Mint_NFTs";
+    public static final String ENTER_THE_WALLET_ADDR_OF_YOUR_BUDDY = "Enter the wallet address of your buddy";
 
 
     public SendMessage handle(Update update) {
@@ -40,13 +40,21 @@ public class MintNFTHandler {
             }
 
             if (callBackData.contains(MINT_NFTS_FOR_MY_OTHERS)) {
-                return customMsg(ENTER_THE_NAME_OF_NFT, update);
+                return customMsg(ENTER_THE_WALLET_ADDR_OF_YOUR_BUDDY, update);
             }
         }
 
         String chatId = Optional.ofNullable(update.getMessage()).map(m -> m.getChat().getId().toString()).orElse(null);
         if (StringUtils.isNotBlank(chatId)) {
             String prevMsg = update.getMessage().getReplyToMessage().getText();
+
+            if (ENTER_THE_WALLET_ADDR_OF_YOUR_BUDDY.equals(prevMsg)) {
+                String walletAddr = DataStore.getWalletAddrOfUser(chatId);
+                TokenInfo tokenInfo = getTokenInfo(chatId);
+                tokenInfo.setBuddyWalletAddress(update.getMessage().getText());
+                DataStore.addToken(walletAddr, tokenInfo);
+                return customMsg(ENTER_THE_NAME_OF_NFT, update);
+            }
 
             if (ENTER_THE_NAME_OF_NFT.equals(prevMsg)) {
                 String walletAddr = DataStore.getWalletAddrOfUser(chatId);
@@ -65,12 +73,25 @@ public class MintNFTHandler {
             }
 
             if (ENTER_THE_URL_OF_IMAGE.equals(prevMsg)) {
+                SendMessage sendMessage;
+                TokenInfo mintedToken;
                 String walletAddr = DataStore.getWalletAddrOfUser(chatId);
                 TokenInfo tokenInfo = getTokenInfo(walletAddr);
                 tokenInfo.setTokenUrl(update.getMessage().getText());
-                //call REST service from here
+
                 DataStore.addToken(walletAddr, tokenInfo);
-                return customMsg(String.format("Minting the image with  name: %s desc: %s url: %s NOW  for address : %s", tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr), update);
+                if (StringUtils.isNotBlank(tokenInfo.getBuddyWalletAddress())) {
+                    sendMessage  = customMsg(String.format("Minting the image with  name: %s desc: %s url: %s NOW  for address : %s", tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), tokenInfo.getBuddyWalletAddress()), update);
+                    //call REST service from here
+                     mintedToken  =  restfulMint(tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), tokenInfo.getBuddyWalletAddress());
+                    return sendMessage;
+                } else {
+                    sendMessage  = customMsg(String.format("Minting the image with  name: %s desc: %s url: %s NOW  for address : %s", tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr), update);
+                    //call REST service from here
+                     mintedToken  =restfulMint(tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr);
+                    return sendMessage;
+                }
+
             }
 
         }
@@ -79,6 +100,16 @@ public class MintNFTHandler {
         return mintNFTDefault();
 
 
+    }
+
+    private TokenInfo restfulMint(String name, String description, String tokenUrl, String buddyWalletAddress) {
+
+        TokenInfo tokenInfo = new TokenInfo(name,description,tokenUrl, null,null,buddyWalletAddress);
+
+        //make actual rest call here and set contract Addr and tokenId
+        System.out.println("REST CALL HERE");
+
+        return tokenInfo;
     }
 
     public static SendMessage customMsg(String msg, Update update) {
