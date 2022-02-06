@@ -87,7 +87,7 @@ function NavBar() {
               >
                 Telegram
               </Button>
-              <Account triedToEagerConnect={triedToEagerConnect} />
+              <Account />
           </Flex>
         </Flex>
       </header>

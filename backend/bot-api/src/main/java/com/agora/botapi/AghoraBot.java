@@ -13,12 +13,12 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class AghoraBot extends TelegramLongPollingBot {
 
     public String getBotUsername() {
-        return null;
+        return "agora_nft_bot";
     }
 
 
     public String getBotToken() {
-        return null;
+        return "5195191462:AAHRQj6d6gGml-8VXNeSm900_9tU4140HjA";
     }
 
     @Autowired

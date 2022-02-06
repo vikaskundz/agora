@@ -21,7 +21,7 @@ function YourTokens() {
 
     return (
         <>
-            <Box>
+            <Box id="mint_nft">
                 <Flex justifyContent='space-between' mx={2}>
                     <Text bold my={2} fontSize={4}
                     style={{
