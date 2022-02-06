@@ -23,9 +23,9 @@ public class MintNFTHandler {
     private static final String MINT_NFTS_FOR_MY_SELF = "Mint_NFTs_For_My_Self";
     private static final String MINT_NFTS_FOR_MY_SELF_WITH_IMAGE_URL = "Mint_NFTs_For_My_Self_With_Image_Url";
     private static final String MINT_NFTS_FOR_MY_OTHERS = "Mint_NFTs_For_Others";
-    public static final String ENTER_THE_URL_OF_IMAGE = "Enter the URL of image ";
-    public static final String ENTER_THE_NAME_OF_NFT = "Enter the name of the NFT ";
-    public static final String ENTER_THE_DESCRIPTION_OF_NFT = "Enter the URL of image ";
+    public static final String ENTER_THE_URL_OF_IMAGE = "Enter the URL of image";
+    public static final String ENTER_THE_NAME_OF_NFT = "Enter the name of the NFT";
+    public static final String ENTER_THE_DESCRIPTION_OF_NFT = "Lets give it a nice description!!... Enter a descriptionfor NFT";
 
 
     public SendMessage handle(Update update) {
@@ -50,6 +50,7 @@ public class MintNFTHandler {
                 String walletAddr = DataStore.getWalletAddrOfUser(chatId);
                 TokenInfo tokenInfo = getTokenInfo(walletAddr);
                 tokenInfo.setName(update.getMessage().getText());
+                DataStore.addToken(walletAddr,tokenInfo);
                 return customMsg(ENTER_THE_DESCRIPTION_OF_NFT, update);
             }
 
@@ -57,15 +58,17 @@ public class MintNFTHandler {
                 String walletAddr = DataStore.getWalletAddrOfUser(chatId);
                 TokenInfo tokenInfo = getTokenInfo(walletAddr);
                 tokenInfo.setDescription(update.getMessage().getText());
+                DataStore.addToken(walletAddr,tokenInfo);
                 return customMsg(ENTER_THE_URL_OF_IMAGE, update);
             }
 
             if (ENTER_THE_URL_OF_IMAGE.equals(prevMsg)) {
                 String walletAddr = DataStore.getWalletAddrOfUser(chatId);
                 TokenInfo tokenInfo = getTokenInfo(walletAddr);
+                tokenInfo.setTokenUrl(update.getMessage().getText());
                 //call REST service from here
-                DataStore.saveMintedTokenInfo(chatId,tokenInfo);
-                return customMsg(String.format("Minting the image with  name: {} desc: {} url: {} NOW  for address :{}", tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr), update);
+                DataStore.addToken(walletAddr,tokenInfo);
+                return customMsg(String.format("Minting the image with  name: %s desc: %s url: %s NOW  for address : %s", tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr), update);
             }
 
         }

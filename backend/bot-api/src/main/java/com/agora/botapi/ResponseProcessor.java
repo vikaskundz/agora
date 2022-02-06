@@ -28,9 +28,9 @@ public class ResponseProcessor {
         String msg = update.getMessage().getText();
         if (DataStore.hasWalletRegistered(chatId)) {
 
-            if (MintNFTHandler.ENTER_THE_URL_OF_IMAGE.equals(update.getMessage().getReplyToMessage()) ||
-                    MintNFTHandler.ENTER_THE_NAME_OF_NFT.equals(update.getMessage().getReplyToMessage()) ||
-                    MintNFTHandler.ENTER_THE_DESCRIPTION_OF_NFT.equals(update.getMessage().getReplyToMessage())) {
+            if (MintNFTHandler.ENTER_THE_URL_OF_IMAGE.equals(update.getMessage().getReplyToMessage().getText()) ||
+                    MintNFTHandler.ENTER_THE_NAME_OF_NFT.equals(update.getMessage().getReplyToMessage().getText()) ||
+                    MintNFTHandler.ENTER_THE_DESCRIPTION_OF_NFT.equals(update.getMessage().getReplyToMessage().getText())) {
                 return mintNFTHandler.handle(update);
             }
 
