@@ -27,6 +27,8 @@ public class MintNFTHandler {
     public static final String ENTER_THE_NAME_OF_NFT = "Enter the name of the NFT";
     public static final String ENTER_THE_DESCRIPTION_OF_NFT = "Lets give it a nice description!!... Enter a descriptionfor NFT";
 
+    public static final String MINT_NFTS_OPTION = "Mint_NFTs";
+
 
     public SendMessage handle(Update update) {
 

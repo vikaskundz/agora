@@ -11,6 +11,8 @@ import java.util.List;
 @Component
 public class MyProfileNFTHandler {
 
+    public static final String MY_PROFILE_OPTION = "My_Profile";
+
     public SendMessage handle(Update update) {
         SendMessage sendMessage = new SendMessage();
         String chatId = update.getCallbackQuery().getMessage().getChatId().toString();

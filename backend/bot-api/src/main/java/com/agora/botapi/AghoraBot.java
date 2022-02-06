@@ -11,9 +11,12 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import static com.agora.botapi.handlers.ExploreNFTHandler.EXPLORE_NFTS_OPTION;
+import static com.agora.botapi.handlers.MyProfileNFTHandler.MY_PROFILE_OPTION;
+import static com.agora.botapi.handlers.mint.MintNFTHandler.MINT_NFTS_OPTION;
+
 @Component
 public class AghoraBot extends TelegramLongPollingBot {
-
     public String getBotUsername() {
         return "agora_nft_bot";
     }
@@ -44,16 +47,16 @@ public class AghoraBot extends TelegramLongPollingBot {
         } else if (update.hasCallbackQuery()) {
             String callBackData = update.getCallbackQuery().getData();
 
-            if (callBackData.contains("Mint_NFTs")) {
+            if (callBackData.contains(MINT_NFTS_OPTION)) {
                 SendMessage message = mintNFTHandler.handle(update);
                 sendMessage(message, update);
             }
 
-            if (callBackData.contains("Explore_NFTs")) {
+            if (callBackData.contains(EXPLORE_NFTS_OPTION)) {
                 SendMessage message = exploreNFTHandler.handle(update);
                 sendMessage(message, update);
             }
-            if (callBackData.contains("My_Profile")) {
+            if (callBackData.contains(MY_PROFILE_OPTION)) {
                 SendMessage message = profileNFTHandler.handle(update);
                 sendMessage(message, update);
             }
@@ -61,7 +64,7 @@ public class AghoraBot extends TelegramLongPollingBot {
         }
     }
 
-    private void sendMessage(SendMessage message,  Update update) {
+    private void sendMessage(SendMessage message, Update update) {
         try {
             String chatId = update.getCallbackQuery() != null ? update.getCallbackQuery().getMessage().getChat().getId().toString() : update.getMessage().getChat().getId().toString();
             message.setChatId(chatId);
