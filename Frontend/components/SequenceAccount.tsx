@@ -1,62 +1,55 @@
 import SequenceService from "../services/sequence.service";
-import { useEffect, useState } from "react";
-import { Button, Text, Flex, Box} from "pcln-design-system";
+import { useEffect, useState, useContext } from "react";
+import { Button, Text, Flex, Box } from "pcln-design-system";
 import { formatEtherscanLink, shortenHex } from "../util";
-import useENSName from "../hooks/useENSName";
+import AccountContext from "../context/AccountContext";
 
 
 export default function Account() {
-  const [account,setAccount] = useState(null);
-  const [walletAddress,setWalletAddress] = useState('');
-  useEffect(() => {
-    if(account && account.connected)
-      getWalletAddress()
+  const { isConnected, setIsConnected, walletAddress, setWalletAddress } = useContext(AccountContext)
+  //const { account } = useWeb3React();
+  //const ENSName = useENSName(account);
+  const [connectionDetails, setConnectionDetails] = useState(null)
+  const [wallet, setWallet] = useState(null)
+  //isConnected && walletAddress && connectWallet()
 
-  },[account])
-
-  const ENSName = useENSName(account);
-
-  function connectWallet() {
-    SequenceService.connectWallet().then(account => {
-      console.log('account',account )
-      account && account.connected ? setAccount(account) : setAccount(null)
-    })
+  async function connectWallet() {
+    const { _wallet, _connectDetails } = await SequenceService.connectWallet()
+    if (_wallet) {
+      const _wAddress = await _wallet.getAddress()
+      setIsConnected(true)
+      setConnectionDetails(_connectDetails)
+      setWallet(_wallet)
+      setWalletAddress(_wAddress)
+    }
   }
 
-  function disconnectWallet(){
+  function disconnectWallet() {
     SequenceService.disconnectWallet().then(details => {
-      console.log('disconnect',details);
-      account && account.connected ? setAccount(details) : setAccount(null)
+      console.log('disconnect', details);
+      setIsConnected(false)
     })
-  }
-
-  function getWalletAddress() {
-     SequenceService.getWalletAddress().then(walletAddress => {
-       console.log('walletAddress',walletAddress);
-
-      account && account.connected ? setWalletAddress(walletAddress) : setWalletAddress('')
-     });
   }
 
   return (
     <>
       {
-        account && account.connected ? (
+        isConnected ? (
           <Flex flexDirection="row" alignItems="center" justifyContent="center">
-          <Text mx={2} px={2}>Welcome,</Text> <a
-            {...{
-              href: formatEtherscanLink("Account", [Number(account.chainId), walletAddress]),
-              target: "_blank",
-              rel: "noopener noreferrer",
-            }}
-          >
-            {ENSName || `${shortenHex(walletAddress, 6)}`}
-          </a>
-          <Button onClick={disconnectWallet} variation="subtle">signout</Button>
+            <Text mx={2} px={2}>Welcome,</Text> <a
+              {...{
+                href: formatEtherscanLink("Account", [Number(connectionDetails?.chainId), walletAddress]),
+                target: "_blank",
+                rel: "noopener noreferrer",
+              }}
+            >
+              {walletAddress || `${shortenHex(walletAddress, 6)}`}
+            </a>
+            <Button onClick={disconnectWallet} variation="subtle">signout</Button>
           </Flex>
         ) : (
           <Button onClick={connectWallet}>
-              Connect With Sequence
+            Connect With Sequence
           </Button>
         )
       }

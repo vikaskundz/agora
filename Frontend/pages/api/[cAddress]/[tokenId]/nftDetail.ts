@@ -7,17 +7,20 @@ myHeaders.append('Authorization', serverRuntimeConfig.authApiKey)
 
 var requestOptions = {
   method: 'GET',
-  headers: myHeaders,
   //redirect: 'follow'
 }
 
 export default function handler(req, res) {
   const { cAddress, tokenId } = req.query
   fetch(
-    `https://api.nftport.xyz/v0/nfts/${cAddress}/${tokenId}?chain=polygon&refresh_metadata=false`,
+    `https://api.covalenthq.com/v1/137/tokens/${cAddress}/nft_metadata/${tokenId}/?key=ckey_9a7b0372875b4706b129212346d`,
     requestOptions
   )
     .then((response) => response.text())
-    .then((result) => res.status(200).json(result))
+    .then((result: any) => {
+      const jsonData = JSON.parse(result|| {})
+      const nft_data = jsonData?.data?.items[0]?.nft_data[0] || {}
+      return res.status(200).json({nft_data})
+    })
     .catch((error) => res.status(200).json({ error }))
 }

@@ -13,7 +13,7 @@ var requestOptions = {
 
 export default function handler(req, res) {
   fetch(
-    'https://api.nftport.xyz/v0/nfts/0x47c7ff137d7a6644a9a96f1d44f5a6f857d9023f?chain=polygon&page_number=1&page_size=10&include=all&refresh_metadata=false',
+    `https://api.nftport.xyz/v0/nfts/${serverRuntimeConfig.contractAddress}?chain=polygon&page_number=1&page_size=10&include=all&refresh_metadata=false`,
     requestOptions
   )
     .then((response) => response.text())

@@ -7,21 +7,22 @@ const StyledImage = styled(BackgroundImage)`
     margin: 10px;
     background-color: white;
     border-radius: 10px;
+    background-color: #0d1e31;
 `
-function DetailCard({ file_information, cached_file_url, metadata }) {
-    const metaDataKeys = Object.keys(metadata || {})
+function DetailCard({ external_data }) {
+    const metaDataKeys = Object.keys(external_data || {})
     return (
         <Box mx={2}>
             <Card
                 boxShadowSize='xl'
-                borderWidth={1}
+                borderWidth={0}
                 borderRadius={6}
                 width='100%'
             >
                 <Flex>
                     <Box width={2 / 3}>
                         <StyledImage
-                            image={cached_file_url} height='600px'>
+                            image={external_data?.image || '/no-image.jpeg'} height='600px'>
                         </StyledImage>
                     </Box>
                     <Flex width={1 / 3} justifyContent='center' alignItems='start' flexDirection='column'>
@@ -33,7 +34,7 @@ function DetailCard({ file_information, cached_file_url, metadata }) {
                                     </Box>
                                     <Box>
                                         <Text style={{ wordBreak: 'break-all' }}>
-                                            {metadata[key]}
+                                            {external_data[key]}
                                         </Text>
                                     </Box>
                                 </Flex>
