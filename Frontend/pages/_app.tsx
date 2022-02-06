@@ -9,15 +9,19 @@ import AccountContext, { AccountDetails } from "../context/AccountContext";
 import { useState } from 'react'
 
 function NextWeb3App({ Component, pageProps }: AppProps) {
-  const [ isConnected, setIsConnected ] =useState(false)
-  const [ walletAddress, setWalletAddress ] =useState('')
+  const [isConnected, setIsConnected] = useState(false)
+  const [walletAddress, setWalletAddress] = useState('')
+  const [wallet, setWallet] = useState(null)
+
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <AccountContext.Provider value={{
         isConnected,
         setIsConnected,
         setWalletAddress,
-        walletAddress
+        walletAddress,
+        wallet, setWallet
+
       } as AccountDetails}>
         <ThemeProvider
           theme={{

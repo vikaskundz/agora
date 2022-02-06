@@ -16,9 +16,12 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.List;
 
+import static com.agora.botapi.handlers.ExploreNFTHandler.EXPLORE_NFTS_OPTION;
+import static com.agora.botapi.handlers.MyProfileNFTHandler.MY_PROFILE_OPTION;
+import static com.agora.botapi.handlers.mint.MintNFTHandler.MINT_NFTS_OPTION;
+
 @Component
 public class AghoraBot extends TelegramLongPollingBot {
-
     public String getBotUsername() {
         return "juice_test_bot";
     }
@@ -55,12 +58,11 @@ public class AghoraBot extends TelegramLongPollingBot {
         } else if (update.hasCallbackQuery()) {
             String callBackData = update.getCallbackQuery().getData();
 
-            if (callBackData.contains("Mint_NFTs")) {
+            if (callBackData.contains(MINT_NFTS_OPTION)) {
                 SendMessage message = mintNFTHandler.handle(update);
                 sendMessage(message, update);
             }
-
-            if (callBackData.contains("Explore_NFTs")) {
+            if (callBackData.contains(EXPLORE_NFTS_OPTION)) {
                 List<SendPhoto> photos = exploreNFTHandler.handle(update);
                 sendMessage(photos, update);
             }
@@ -70,7 +72,7 @@ public class AghoraBot extends TelegramLongPollingBot {
                 sendMessage(photos, update);
             }
 
-            if (callBackData.contains("My_Profile")) {
+            if (callBackData.contains(MY_PROFILE_OPTION)) {
                 List<SendPhoto> photos = profileNFTHandler.handle(update);
                 sendMessage(photos, update);
             }
@@ -102,15 +104,6 @@ public class AghoraBot extends TelegramLongPollingBot {
             }
         } catch (TelegramApiException e) {
             e.printStackTrace();
-            SendMessage message = new SendMessage();
-            String chatId = update.getCallbackQuery() != null ? update.getCallbackQuery().getMessage().getChat().getId().toString() : update.getMessage().getChat().getId().toString();
-            message.setChatId(chatId);
-            message.setText("Failed to perform the action!");
-            try {
-                execute(message);
-            } catch (TelegramApiException e1) {
-                e1.printStackTrace();
-            }
         }
     }
 

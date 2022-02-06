@@ -2,7 +2,7 @@ package com.agora.botapi;
 
 import com.agora.botapi.data.DataStore;
 import com.agora.botapi.handlers.mint.MintNFTHandler;
-import com.agora.botapi.util.KeyBoardUtils;
+import com.agora.botapi.utils.KeyBoardUtils;
 import com.agora.botapi.validation.EthereumAddressValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

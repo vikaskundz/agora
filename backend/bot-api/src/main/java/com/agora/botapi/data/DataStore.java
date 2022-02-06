@@ -2,7 +2,6 @@ package com.agora.botapi.data;
 
 
 import org.apache.commons.collections4.CollectionUtils;
-import org.glassfish.jersey.internal.guava.Lists;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,10 +30,11 @@ public class DataStore {
     }
 
 
-    private static final Map<String, TokenInfo> mintProcessData = new HashMap<>();//chatId,TokenInfo
+    private static final Map<String, TokenInfo> selfMintProcessData = new HashMap<>();//chatId,TokenInfo
+
 
     public static TokenInfo getTokenInfo(String walletAddr) {
-        TokenInfo token = mintProcessData.get(walletAddr);
+        TokenInfo token = selfMintProcessData.get(walletAddr);
         if (token == null) {
             token = new TokenInfo();
         }
@@ -42,16 +42,15 @@ public class DataStore {
     }
 
     public static void addToken(String walletAddr, TokenInfo tokenInfo) {
-        mintProcessData.put(walletAddr, tokenInfo);
+        selfMintProcessData.put(walletAddr, tokenInfo);
     }
 
     private static final Map<String, List<TokenInfo>> mintedTokens = new HashMap<>();//chatId,TokenInfoList
 
     public static void saveMintedTokenInfo(String chatId, TokenInfo tokenInfo) {
-        if(CollectionUtils.isNotEmpty(mintedTokens.get(chatId)) ){
+        if (CollectionUtils.isNotEmpty(mintedTokens.get(chatId))) {
             mintedTokens.get(chatId).add(tokenInfo);
-        }
-        else{
+        } else {
             List<TokenInfo> list = new ArrayList<>();
             list.add(tokenInfo);
             mintedTokens.put(chatId, list);
@@ -60,8 +59,8 @@ public class DataStore {
 
 
     public static List<TokenInfo> retrieveMintedTokenInfo(String chatId) {
-        if(CollectionUtils.isNotEmpty(mintedTokens.get(chatId)) ){
-           return mintedTokens.get(chatId);
+        if (CollectionUtils.isNotEmpty(mintedTokens.get(chatId))) {
+            return mintedTokens.get(chatId);
         }
         return null;
     }

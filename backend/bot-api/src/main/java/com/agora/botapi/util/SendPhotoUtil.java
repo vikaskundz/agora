@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SendPhotoUtil {
-    public static List<SendPhoto> sendMessage(Update update, List<String> cachedUrlList, List<String> tokenIdList, List<String> contractList) {
+    public static List<SendPhoto> sendMessage(Update update, List<String> cachedUrlList, List<String> tokenIdList, List<String> contractList, List<Double> similarity, boolean showDetails) {
         List<SendPhoto> sendMessages = new ArrayList<>();
         for (int i = 0; i < cachedUrlList.size(); i++) {
             SendPhoto message = new SendPhoto();
@@ -21,21 +21,27 @@ public class SendPhotoUtil {
                 continue;
             }
             message.setPhoto(new InputFile().setMedia(cachedUrlList.get(i)));
-            InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
-            List<InlineKeyboardButton> rowInline1 = new ArrayList();
-            List<List<InlineKeyboardButton>> rowsInline = new ArrayList();
-            InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
-            inlineKeyboardButton.setText("Details");
-            Map<String, String> data = new HashMap<>();
-            data.put("t", tokenIdList.get(i));
-            data.put("c", contractList.get(i));
-            inlineKeyboardButton.setCallbackData("DETAILS_NFT?" + DataCodec.encode(data));
-            rowInline1.add(inlineKeyboardButton);
-            rowsInline.add(new ArrayList<>());
-            rowsInline.add(rowInline1);
-            rowsInline.add(new ArrayList<>());
-            markupInline.setKeyboard(rowsInline);
-            message.setReplyMarkup(markupInline);
+            if (showDetails) {
+                InlineKeyboardMarkup markupInline = new InlineKeyboardMarkup();
+                List<InlineKeyboardButton> rowInline1 = new ArrayList();
+                List<List<InlineKeyboardButton>> rowsInline = new ArrayList();
+                InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
+                inlineKeyboardButton.setText("Details");
+                Map<String, String> data = new HashMap<>();
+                data.put("t", tokenIdList.get(i));
+                data.put("c", contractList.get(i));
+                inlineKeyboardButton.setCallbackData("DETAILS_NFT?" + DataCodec.encode(data));
+                rowInline1.add(inlineKeyboardButton);
+                rowsInline.add(new ArrayList<>());
+                rowsInline.add(rowInline1);
+                rowsInline.add(new ArrayList<>());
+                markupInline.setKeyboard(rowsInline);
+                message.setReplyMarkup(markupInline);
+            } else {
+                message.setCaption("<b><i>Similarity %: </i></b>" +(similarity.get(i))*100);
+                message.setParseMode("HTML");
+            }
+
             sendMessages.add(message);
         }
         return sendMessages;

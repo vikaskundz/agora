@@ -1,16 +1,27 @@
 import Head from "next/head";
 import Link from "next/link";
 // import Account from "../components/Account";
+import { useContext } from "react";
 import Account from "./SequenceAccount";
 import useEagerConnect from "../hooks/useEagerConnect";
-import { Banner, Flex, Heading, Button, Image } from "pcln-design-system";
+import {
+  Banner,
+  Flex,
+  Heading,
+  Button,
+  Image,
+  IconButton,
+} from "pcln-design-system";
+import { Chat } from "pcln-icons";
 import styled from "styled-components";
 const StyledAnchor = styled.a`
   text-decoration: none;
   color: inherit;
 `;
+import AccountContext from "../context/AccountContext";
 
 function NavBar() {
+  const { isConnected } = useContext(AccountContext)
   const triedToEagerConnect = useEagerConnect();
   return (
     <>
@@ -20,7 +31,6 @@ function NavBar() {
       </Head>
 
       <header>
-
         <Flex
           alignItems="center"
           justifyContent="space-between"
@@ -46,6 +56,7 @@ function NavBar() {
                         backgroundClip: "text",
                         WebkitBackgroundClip: "text",
                         color: "transparent",
+                        cursor: "pointer",
                       }}
                     >
                       Agora
@@ -76,18 +87,29 @@ function NavBar() {
                 ></Image>
               </Button>
               */}
-              <Button
+            {/*<Button
                 variation="outline"
                 mx={3}
                 onClick={() => {
                   window.open(
                     " http://t.me/AgoriNFTBot"
                   );
-                }}
               >
+            }
                 Telegram
-              </Button>
-              <Account />
+              </Button>*/}
+            {isConnected ? <IconButton
+
+              title="Agora Bot"
+              onClick={() => {
+                window.open(
+                  " http://t.me/AgoriNFTBot"
+                );
+              }}
+              mr={2}
+              icon={<Chat color="primary" size={30} />}
+            /> : ''}
+            <Account />
           </Flex>
         </Flex>
       </header>

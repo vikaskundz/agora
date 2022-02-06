@@ -1,3 +1,8 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package com.agora.botapi.handlers;
 
 import com.agora.botapi.util.SendPhotoUtil;
@@ -16,6 +21,10 @@ import static com.agora.botapi.data.DataStore.getWalletAddrOfUser;
 
 @Component
 public class MyProfileNFTHandler {
+    public static final String MY_PROFILE_OPTION = "My_Profile";
+
+    public MyProfileNFTHandler() {
+    }
 
     @Autowired
     private WebClientProxy webClientProxy;
@@ -28,6 +37,6 @@ public class MyProfileNFTHandler {
         List<String> cachedUrlList = JsonPath.parse(apiResponse).read("$.nfts[*].cached_file_url", List.class);
         List<String> tokenIdList = JsonPath.parse(apiResponse).read("$.nfts[*].token_id", List.class);
         List<String> contractList = JsonPath.parse(apiResponse).read("$.nfts[*].contract_address", List.class);
-        return SendPhotoUtil.sendMessage(update, cachedUrlList, tokenIdList, contractList);
+        return SendPhotoUtil.sendMessage(update, cachedUrlList, tokenIdList, contractList, null, true);
     }
 }

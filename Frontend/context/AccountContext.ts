@@ -5,6 +5,8 @@ export interface AccountDetails {
   walletAddress: string
   setIsConnected: Function
   setWalletAddress: Function
+  wallet: object
+  setWallet: Function
 }
 
 const AccountContext = React.createContext({} as AccountDetails)

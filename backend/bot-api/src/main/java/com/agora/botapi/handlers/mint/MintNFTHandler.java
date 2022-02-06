@@ -2,8 +2,8 @@ package com.agora.botapi.handlers.mint;
 
 import com.agora.botapi.data.DataStore;
 import com.agora.botapi.data.TokenInfo;
-import com.agora.botapi.util.KeyBoardUtils;
 import com.agora.botapi.util.WebClientProxy;
+import com.agora.botapi.utils.KeyBoardUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,10 +28,8 @@ public class MintNFTHandler {
     public static final String ENTER_THE_URL_OF_IMAGE = "Enter the URL of image";
     public static final String ENTER_THE_NAME_OF_NFT = "Enter the name of the NFT";
     public static final String ENTER_THE_DESCRIPTION_OF_NFT = "Lets give it a nice description!!... Enter a descriptionfor NFT";
-
     public static final String MINT_NFTS_OPTION = "Mint_NFTs";
     public static final String ENTER_THE_WALLET_ADDR_OF_YOUR_BUDDY = "Enter the wallet address of your buddy";
-
 
     public SendMessage handle(Update update) {
         if (update.getCallbackQuery() != null) {
@@ -90,7 +88,6 @@ public class MintNFTHandler {
                     sendMessage = customMsg(String.format("Minting the image with  name: %s desc: %s url: %s NOW  for address : %s", tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr), update);
                     //call REST service from here
                     mintedToken = restfulMint(tokenInfo.getName(), tokenInfo.getDescription(), tokenInfo.getTokenUrl(), walletAddr);
-                    return sendMessage;
                 }
 
             }
@@ -102,16 +99,17 @@ public class MintNFTHandler {
 
     private TokenInfo restfulMint(String name, String description, String tokenUrl, String walletAddress) {
 
-        Map<String,String> postData = new HashMap<>();
-        postData.put("tokenUrl",tokenUrl);
-        postData.put("nftName",name);
-        postData.put("nftDesc",description);
+        Map<String, String> postData = new HashMap<>();
+        postData.put("tokenUrl", tokenUrl);
+        postData.put("nftName", name);
+        postData.put("nftDesc", description);
         postData.put("account", walletAddress);
-        webClientProxy.sendAndReceiveForMint("/mintNft",postData);
+        webClientProxy.sendAndReceiveForMint("/mintNft", postData);
         TokenInfo tokenInfo = new TokenInfo();
         tokenInfo.setTokenUrl("");
         return tokenInfo;
     }
+
 
     public static SendMessage customMsg(String msg, Update update) {
         SendMessage message = new SendMessage();

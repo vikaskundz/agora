@@ -1,5 +1,6 @@
 package com.agora.botapi.config;
 
+
 import com.agora.botapi.AghoraBot;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,11 +10,13 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 @Configuration
 public class AppConfig {
+    public AppConfig() {
+    }
 
     @Bean
     public TelegramBotsApi telegramBotsApi() throws TelegramApiException {
         TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-        botsApi.registerBot(aghoraBot());
+        botsApi.registerBot(this.aghoraBot());
         return botsApi;
     }
 
@@ -21,5 +24,4 @@ public class AppConfig {
     public AghoraBot aghoraBot() {
         return new AghoraBot();
     }
-
 }

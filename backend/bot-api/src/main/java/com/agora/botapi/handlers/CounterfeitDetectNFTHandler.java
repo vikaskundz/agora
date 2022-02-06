@@ -21,11 +21,10 @@ public class CounterfeitDetectNFTHandler {
     public List<SendPhoto> handle(Update update) {
         String apiResponse = webClientProxy.sendAndReceiveForMint("/similarNfts",
                 Map.of("tokenUrl","https://ipfs.io/ipfs/bafkreibtsi3nhctfhk22ncm5z3frci2szjrcn7x4roe7biq6nfl7iwfuqa"));
-        List<String> cachedUrlList = JsonPath.parse(apiResponse).read("$.nfts[*].cached_file_url", List.class);
-        List<String> tokenIdList = JsonPath.parse(apiResponse).read("$.nfts[*].token_id", List.class);
-        List<String> contractList = JsonPath.parse(apiResponse).read("$.nfts[*].contract_address", List.class);
-        List<String> captionList = new ArrayList<>();
-        return SendPhotoUtil.sendMessage(update, cachedUrlList, tokenIdList, contractList);
+        List<String> cachedUrlList = JsonPath.parse(apiResponse).read("$.similar_nfts[*].cached_file_url", List.class);
+        List<Double> similarityList = JsonPath.parse(apiResponse).read("$.similar_nfts[*].similarity", List.class);
+
+        return SendPhotoUtil.sendMessage(update, cachedUrlList, null,null, similarityList, false);
     }
 
 

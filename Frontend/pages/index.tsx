@@ -7,6 +7,7 @@ import HeroBanner from "../components/HeroBanner";
 import { sequence } from '0xsequence';
 import AccountContext from "../context/AccountContext";
 import { useContext } from "react";
+import MarketListings from "../components/MarketListings";
 
 
 function Home() {
@@ -19,6 +20,7 @@ function Home() {
       {isConnected ? <Homepage /> :
         <Flex flexDirection="column">
           <HeroBanner />
+          <MarketListings />
         </Flex>
       }
     </Box>

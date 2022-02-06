@@ -1,26 +1,31 @@
 import { sequence } from '0xsequence'
 type WalletDataType = {
-  _connectDetails: {connected: boolean}
+  _connectDetails: { connected: boolean }
   _wallet: any
 }
 
-async function connectWallet() {
+async function connectWallet(isConnected, setIsConnected, wallet) {
   const walletData = {} as WalletDataType
-  const _wallet = new sequence.Wallet('mainnet')
-  const session = _wallet.getSession()
-  if (!session?.walletContext) {
-    const connectDetails = await _wallet.connect()
-    walletData._connectDetails = connectDetails
+  let _wallet = wallet
+  const session = _wallet?.getSession()
+  if(session?.accountAddress){
+    setIsConnected(true)
+  }
+  else if(!isConnected) {
+    _wallet = new sequence.Wallet('mainnet')
+    const details = await _wallet.connect()
+    walletData._connectDetails = details
+    setIsConnected(details.connected)
   }
   walletData._wallet = _wallet
-  console.log('walletData', walletData)
+  // console.log('walletData', walletData)
   return walletData
 }
 
 async function disconnectWallet() {
   const wallet = new sequence.Wallet('mainnet')
   const connectDetails = await wallet.disconnect()
-  console.log('disconnectWallet', connectDetails)
+  console.log('disconnectWall/et', connectDetails)
   return connectDetails
 }
 
@@ -29,4 +34,10 @@ async function getWalletAddress() {
   return wallet
 }
 
-export default { connectWallet, getWalletAddress, disconnectWallet }
+async function getSession() {
+  const wallet = await new sequence.Wallet('mainnet')
+  return wallet.getSession()
+}
+
+
+export default { connectWallet, getWalletAddress, disconnectWallet, getSession }
