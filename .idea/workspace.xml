@@ -2,31 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="056d105e-2e19-4078-b0c5-31effa8cf686" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Frontend/components/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/components/Account.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/components/HeroBanner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/components/HeroBanner.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/components/ListingCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/components/ListingCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/components/MarketListings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/components/MarketListings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/components/MintForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/components/MintForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/components/MintNft.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/components/MintNft.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/components/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/components/NavBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/components/SequenceAccount.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/components/SequenceAccount.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/components/YourTokens.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/components/YourTokens.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/components/services/sequence.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/components/services/sequence.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/context/AccountContext.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/context/AccountContext.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/pages/_document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/pages/_document.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/pages/api/[cAddress]/[tokenId]/nftDetail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/pages/api/[cAddress]/[tokenId]/nftDetail.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/pages/api/fetchlist.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/pages/api/fetchlist.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/services/sequence.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/services/sequence.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/util.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/util.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot-api/target/bot-api-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot-api/target/bot-api-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot-api/target/bot-api-1.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot-api/target/bot-api-1.0-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot-api/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot-api/target/maven-archiver/pom.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot-api/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot-api/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/bot-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bot-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/backend/bot-api/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,7 +31,7 @@
           <entry key="Dockerfile" value="3" />
           <entry key="class" value="2" />
           <entry key="dockerignore" value="1" />
-          <entry key="gitignore" value="3" />
+          <entry key="gitignore" value="4" />
           <entry key="java" value="75" />
           <entry key="sh" value="3" />
           <entry key="ts" value="1" />
@@ -68,14 +45,14 @@
           <entry key="CLASS" value="2" />
           <entry key="Dockerfile" value="3" />
           <entry key="JAVA" value="75" />
-          <entry key="PLAIN_TEXT" value="11" />
+          <entry key="PLAIN_TEXT" value="12" />
           <entry key="XML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Dockerfile" value="15" />
-          <entry key="gitignore" value="18" />
+          <entry key="gitignore" value="26" />
           <entry key="java" value="3304" />
           <entry key="txt" value="25" />
           <entry key="xml" value="3" />
@@ -85,7 +62,7 @@
         <counts>
           <entry key="Dockerfile" value="15" />
           <entry key="JAVA" value="3304" />
-          <entry key="PLAIN_TEXT" value="43" />
+          <entry key="PLAIN_TEXT" value="51" />
           <entry key="XML" value="3" />
         </counts>
       </usages-collector>
@@ -94,17 +71,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/backend/bot-api/src/main/java/com/agora/botapi/AghoraBot.java">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="31" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1103#1104#0" expanded="true" />
-                <element signature="e#1139#1140#0" expanded="true" />
-                <element signature="e#1175#1176#0" expanded="true" />
-                <element signature="e#1244#1245#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="22">
+              <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -195,40 +165,6 @@
               <item name="backend" type="462c0819:PsiDirectoryNode" />
               <item name="bot-api" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="agora" type="b2602c69:ProjectViewProjectNode" />
-              <item name="agora" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="bot-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="agora" type="b2602c69:ProjectViewProjectNode" />
-              <item name="agora" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="bot-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="agora" type="b2602c69:ProjectViewProjectNode" />
-              <item name="agora" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="bot-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="agora" type="b2602c69:ProjectViewProjectNode" />
-              <item name="agora" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="bot-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="botapi" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -237,7 +173,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1644194915951" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1644195345865" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
@@ -364,8 +300,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.86337763" visible="true" weight="0.22346666" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.86337763" visible="true" weight="0.22346666" />
       <window_info id="Structure" order="1" sideWeight="0.13662238" side_tool="true" weight="0.29706666" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -380,7 +317,7 @@
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="1.0" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.64182425" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Run with VisualVM" order="11" />
@@ -393,7 +330,7 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="leetcode" order="4" side_tool="true" />
       <window_info anchor="right" id="Flutter Inspector" order="5" />
-      <window_info anchor="right" id="Flutter Outline" order="6" visible="true" weight="0.3296" />
+      <window_info anchor="right" id="Flutter Outline" order="6" weight="0.3296" />
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="right" id="Theme Preview" order="9" />
@@ -793,17 +730,10 @@ URLEncodedUtils.parse(uri, Charset.forName(&quot;UTF-8&quot;))</expression-strin
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3124">
-          <caret line="142" selection-start-line="142" selection-end-line="142" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/bot-api/src/main/java/com/agora/botapi/AghoraBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="31" selection-end-column="5" />
+        <state relative-caret-position="176">
+          <caret line="92" column="66" lean-forward="true" selection-start-line="92" selection-start-column="66" selection-end-line="92" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1103#1104#0" expanded="true" />
@@ -811,6 +741,13 @@ URLEncodedUtils.parse(uri, Charset.forName(&quot;UTF-8&quot;))</expression-strin
             <element signature="e#1175#1176#0" expanded="true" />
             <element signature="e#1244#1245#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
         </state>
       </provider>
     </entry>
