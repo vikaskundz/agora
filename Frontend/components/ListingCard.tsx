@@ -35,9 +35,10 @@ function ListingCard({
   token_id,
   contract_address,
   cached_file_url,
-  chain,
+  name,
   similarity,
   showMoreData,
+  metadata
 }) {
   const sim = (similarity * 100).toFixed();
   const creator = "Satoshi Nakamoto";
@@ -95,15 +96,15 @@ function ListingCard({
             >
               <Box>
                 <Text fontSize={0} style={{ color: "#68686e" }}>
-                  Creator
+                  Name
                 </Text>
-                {creator.length > 10 ? creator.slice(0, 10) + "..." : creator}
+                {name}
               </Box>
               <Box>
                 <Text fontSize={0} style={{ color: "#68686e" }}>
-                  Current Bid
+                  Description
                 </Text>
-                <Text fontSize={2}>5.00 MATIC</Text>
+                <Text fontSize={2}>{metadata?.description || 'No description'}</Text>
               </Box>
             </Flex>
           </Flex>
@@ -119,44 +120,47 @@ function ListingCard({
               </StyledImage>*/}
 
           {showMoreData && (
-            <Flex
-              justifyContent="center"
-              alignItems="start"
-              flexDirection="column"
-            >
-              <Flex m={2} alignItems="center">
-                <Box>
-                  <Text bold caps width={150}>
-                    Similarity :
-                  </Text>
-                </Box>
-                <Box>
-                  <Text>{sim} %</Text>
-                </Box>
+            <>
+              <hr style={{ borderColor: "#68686e" }}></hr>
+              <Flex
+                justifyContent="center"
+                alignItems="start"
+                flexDirection="column"
+              >
+                <Flex m={2} alignItems="center">
+                  <Box>
+                    <Text fontSize={0} style={{ color: "#68686e" }} width={150}>
+                      Similarity :
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Text>{sim} %</Text>
+                  </Box>
+                </Flex>
+                <Flex m={2} alignItems="center">
+                  <Box>
+                    <Text fontSize={0} style={{ color: "#68686e" }} width={150}>
+                      Chain :
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Text>{name}</Text>
+                  </Box>
+                </Flex>
+                <Flex m={2} alignItems="center">
+                  <Box>
+                    <Text fontSize={0} style={{ color: "#68686e" }} width={150}>
+                      Contract Address:
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Text fontSize={1} style={{ wordBreak: "break-all" }}>
+                      {contract_address}
+                    </Text>
+                  </Box>
+                </Flex>
               </Flex>
-              <Flex m={2} alignItems="center">
-                <Box>
-                  <Text bold caps width={150}>
-                    Chain :
-                  </Text>
-                </Box>
-                <Box>
-                  <Text>{chain}</Text>
-                </Box>
-              </Flex>
-              <Flex m={2} alignItems="center">
-                <Box>
-                  <Text bold caps width={150}>
-                    Contract Address:
-                  </Text>
-                </Box>
-                <Box>
-                  <Text fontSize={1} style={{ wordBreak: "break-all" }}>
-                    {contract_address}
-                  </Text>
-                </Box>
-              </Flex>
-            </Flex>
+            </>
           )}
         </StyledCard>
       </StyledAnchor>

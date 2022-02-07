@@ -40,7 +40,6 @@ function MintNft() {
                 borderWidth={1}
                 borderRadius={6}
                 width='100%'
-
             >
                 <Flex
                 >

@@ -29,7 +29,7 @@ function MintForm({ handlePreview, handleReview, submitMint }) {
           tokenUrl,
           nftName,
           nftDesc,
-          account,
+          account: walletAddress,
         }),
       })
         .then((response) => response.json())

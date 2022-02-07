@@ -34,7 +34,7 @@ function HeroBanner() {
           Discover NFTs
         </Button>
         <Button m={2} width={150} onClick={() => {
-          location.hash = "#mint_nft"
+          location.href = "/similarNft"
         }}>
           Mint NFT
         </Button>

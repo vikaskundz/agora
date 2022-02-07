@@ -38,7 +38,6 @@ function NextWeb3App({ Component, pageProps }: AppProps) {
                   primary: {
                     backgroundImage: 'linear-gradient(216.56deg,#4B50E6 15.32%,#E250E5 94.32%)',
                     borderRadius: '500px',
-
                     "&:hover": {
                       backgroundImage: 'linear-gradient(216.56deg,#4B50E6 35.32%,#E250E5 94.32%)',
                       boxShadow: "0 0 0 0 white",

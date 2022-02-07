@@ -40,33 +40,23 @@ function NavBar() {
             borderBottom: "1px solid rgba(235, 235, 235, 0.2)",
           }}
         >
-          <Flex>
-            {/*<Link href="/" passHref>
-                                 <StyledAnchor><Image width='70px' height='70px' alt='homepage' src='/TrueNFTLogo5.png'></Image></StyledAnchor>}
-                                Agora
-                            </Link> */}
-            <Link href="/" passHref>
-              <Flex>
-                <StyledAnchor>
-                  <Heading.h2>
-                    <span
-                      style={{
-                        backgroundImage:
-                          "linear-gradient(216.56deg,#4B50E6 15.32%,#E250E5 94.32%)",
-                        backgroundClip: "text",
-                        WebkitBackgroundClip: "text",
-                        color: "transparent",
-                        cursor: "pointer",
-                      }}
-                    >
-                      Agora
-                    </span>
-                  </Heading.h2>
+          <Link href="/" passHref>
+            <Flex>
+              <StyledAnchor>
+              <Image
+                    width="80px"
+                    alt="homepage"
+                    src="/agora-logo.png"
+                  ></Image>
                 </StyledAnchor>
+                <Heading.h5 mx={2}>NFT Automation</Heading.h5>
+            </Flex>
+            {/* <Flex>
+                <StyledAnchor><Image width='100px' height='100px' alt='homepage' src='/Agora-logo-3.png'></Image></StyledAnchor>
                 <Heading.h5 mx={2}>Nft Automation</Heading.h5>
-              </Flex>
-            </Link>
-          </Flex>
+              </Flex> */}
+          </Link>
+
           <Flex alignItems="center">
             {/*
               <Button
@@ -103,7 +93,7 @@ function NavBar() {
               title="Agora Bot"
               onClick={() => {
                 window.open(
-                  " http://t.me/AgoriNFTBot"
+                  "https://t.me/agora_nft_bot"
                 );
               }}
               mr={2}
