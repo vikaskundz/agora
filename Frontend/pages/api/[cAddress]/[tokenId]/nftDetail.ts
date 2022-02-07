@@ -13,7 +13,7 @@ var requestOptions = {
 export default function handler(req, res) {
   const { cAddress, tokenId } = req.query
   fetch(
-    `https://api.covalenthq.com/v1/137/tokens/${cAddress}/nft_metadata/${tokenId}/?key=ckey_9a7b0372875b4706b129212346d`,
+    `https://api.covalenthq.com/v1/137/tokens/${cAddress}/nft_metadata/${tokenId}/?key=${serverRuntimeConfig.covalentApiKey}`,
     requestOptions
   )
     .then((response) => response.text())

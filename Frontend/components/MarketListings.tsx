@@ -1,6 +1,7 @@
 import { Box, Flex, Text } from "pcln-design-system";
 import useSwr from "swr";
 import ListingCard from "./ListingCard";
+import Carousel from 'flat-carousel';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -9,20 +10,27 @@ function MarketListings(props) {
 
   if (error) return <div>Failed to load users</div>;
   if (!data?.nfts) return <div>Loading market listings...</div>;
-
+  console.log(data)
   return (
     <Box mb={4} p={2} id="market_place">
       <Text bold m={2} fontSize={4}>
         <span
-        style={{
-          backgroundImage : 'linear-gradient(216.56deg,#4B50E6 35.32%,#E250E5 94.32%)',
-          backgroundClip: 'text',
-          WebkitBackgroundClip : 'text',
-          color : 'transparent',
-        }}
+          style={{
+            backgroundImage: 'linear-gradient(216.56deg,#4B50E6 35.32%,#E250E5 94.32%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            color: 'transparent',
+          }}
         >MarketPlace Listings</span>
       </Text>
       <Flex wrap>
+        {/* <Carousel>
+          {data.nfts.map((nft, index) => (
+            <Box key={index} width={200} my={3}>
+              <ListingCard {...nft}></ListingCard>
+            </Box>
+          ))}
+        </Carousel> */}
         {data.nfts.map((nft, index) => (
           <Box key={index} width={[1, 1 / 2, null, 1 / 3, 1 / 4]} my={3}>
             <ListingCard {...nft}></ListingCard>

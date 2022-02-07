@@ -13,7 +13,7 @@ const ETHERSCAN_PREFIXES = {
   4: "rinkeby.",
   5: "goerli.",
   42: "kovan.",
-  80001: "polygon."
+  80001: "polygon.",
 };
 
 export function formatEtherscanLink(
@@ -22,18 +22,18 @@ export function formatEtherscanLink(
 ) {
   switch (type) {
     case "Account": {
-      const [chainId, address] = data;
+      const [chainId='80001', address] = data;
       if(chainId === 80001) {
         return `https://polygonscan.com/address/${address}`
       }
-      return `https://${ETHERSCAN_PREFIXES[chainId]}etherscan.io/address/${address}`;
+      return `https://polygonscan.com/address/${address}`;
     }
     case "Transaction": {
-      const [chainId, hash] = data;
+      const [chainId='80001', hash] = data;
       if(chainId === 80001) {
         return `https://polygonscan.com/tx/${hash}`
       }
-      return `https://${ETHERSCAN_PREFIXES[chainId]}etherscan.io/tx/${hash}`;
+      return `https://polygonscan.com/address/${hash}`;
     }
   }
 }
